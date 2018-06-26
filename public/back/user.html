@@ -84,9 +84,29 @@
 </div>
 
 
+<div class="modal fade" tabindex="-1" id="userModal">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+        <h4 class="modal-title">温馨提示</h4>
+      </div>
+      <div class="modal-body">
+        <p class="red"><i class="glyphicon glyphicon-info-sign"></i>你确定要执行此操作吗？</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-primary" id="submitBtn">确定</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
 <!-- 退出模态框 -->
 <!-- data-dismiss="modal" 关闭模态框 -->
-
 <!-- 注意: 外面是蒙层, 需要给里面的模态框设置 modal-lg 大模态框, modal-sm 小模态框 -->
 <div class="modal fade" tabindex="-1" id="logoutModal">
   <div class="modal-dialog modal-sm">
@@ -124,7 +144,7 @@
       <td>{{ v.mobile }}</td>
       <!-- isDelete 1: 启用, 0: 禁用 -->
       <td>{{ v.isDelete === 1 ? "正常" : "禁用"}}</td>
-      <td>
+      <td data-id="{{ v.id }}">
         {{ if v.isDelete === 1 }}
           <button class="btn btn-danger">禁用</button>
         {{ /if }}
