@@ -54,6 +54,30 @@
       <li class="active">用户管理</li>
     </ol>
 
+    <div class="lt_content">
+
+      <table class="table table-bordered table-hover">
+        <thead>
+          <tr>
+            <th width="10%">序号</th>
+            <th width="20%">用户名</th>
+            <th width="30%">手机号</th>
+            <th width="20%">状态</th>
+            <th width="20%">操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- 挖个坑 -->
+        </tbody>
+      </table>
+
+      <!-- 3.x 版本的 bootstrap 必须准备 ul -->
+      <div class="text-right">
+        <ul id="paginator"></ul>
+      </div>
+
+    </div>
+
 
   </div>
 
@@ -82,14 +106,45 @@
   </div>
 </div>
 
+<!--
+ 模板引擎使用步骤
+ 1. 先引包
+ 2. 准备模板
+ 3. 获取数据, 准备数据
+ 4. 将数据和模板相结合, 生成结构来渲染
+-->
+<script type="text/html" id="tpl">
+  {{ each rows v i }}
+    <tr>
+      <!-- 序号需要加上前面的条数
+           前面有多少条 = (page-1) * size
+      -->
+      <td>{{ i + 1 + (page-1) * size }}</td>
+      <td>{{ v.username }}</td>
+      <td>{{ v.mobile }}</td>
+      <!-- isDelete 1: 启用, 0: 禁用 -->
+      <td>{{ v.isDelete === 1 ? "正常" : "禁用"}}</td>
+      <td>
+        {{ if v.isDelete === 1 }}
+          <button class="btn btn-danger">禁用</button>
+        {{ /if }}
 
-
+        {{ if v.isDelete === 0 }}
+          <button class="btn btn-success">启用</button>
+        {{ /if }}
+      </td>
+    </tr>
+  {{ /each }}
+</script>
 
 <script src="./lib/jquery/jquery.min.js"></script>
 <script src="./lib/bootstrap/js/bootstrap.min.js"></script>
 <script src="./lib/bootstrap-validator/js/bootstrapValidator.min.js"></script>
+<script src="./lib/bootstrap-paginator/bootstrap-paginator.min.js"></script>
 <script src="./lib/nprogress/nprogress.js"></script>
+<script src="./lib/artTemplate/template-web.js"></script>
 <script src="js/common.js"></script>
+<script src="js/user.js"></script>
 
 
 
