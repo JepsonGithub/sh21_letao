@@ -2,6 +2,7 @@
  * Created by Jepson on 2018/4/2.
  */
 $(function() {
+
   // 渲染一级分类
   $.ajax({
     type: "get",
@@ -30,4 +31,5 @@ $(function() {
       }
     })
   }
-})
+
+});
