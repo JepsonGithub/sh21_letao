@@ -109,3 +109,56 @@ img {
   margin: 0;
 }
 
+
+/* 公共的搜索框样式 */
+.lt_search {
+  position: relative;
+  padding: 10px;
+}
+.lt_search .search_input {
+  height: 34px;
+  border: 1px solid #007AFF;
+  border-radius: 5px;
+  font-size: 12px;
+  margin: 0;
+}
+.lt_search .search_btn {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  border-radius: 0 5px 5px 0;
+}
+
+
+/* 公共的产品区域 */
+.lt_product {
+  padding: 10px;
+  text-align: center;
+}
+.lt_product li {
+  float: left;
+  width: 48%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  margin-bottom: 10px;
+}
+.lt_product li:nth-child(odd) {
+  margin-right: 4%;
+}
+.lt_product li a {
+  display: block;
+  padding: 10px;
+}
+.lt_product li a .price {
+  color: red;
+}
+.lt_product li a .oldprice {
+  text-decoration: line-through;
+}
+
+.lt_product .mui-ellipsis-2 {
+  height: 40px;
+}
+
+
