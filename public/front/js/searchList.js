@@ -43,7 +43,6 @@ $(function() {
 
   };
 
-
   mui.init({
     pullRefresh : {
       container:".mui-scroll-wrapper",// 配置下拉刷新容器
@@ -99,69 +98,76 @@ $(function() {
       }
     }
   });
+  // 1. 给 a 标签添加链接, 在下拉刷新中, 点不了
+  // 2. 考虑添加点击事件进行页面跳转, click 事件有 300ms延迟, 需要使用 tap 事件
+  // 3. 光跳转没用, 还需要传递 productId 通过自定义属性的方式存储在 a 标签内
 
-
-
-
+  // tap 事件表示轻触, 轻轻的摸
+  // mui 中认为 click 事件, 有 300ms的延迟, 通过 tap 来绑定事件会更合适
+  $('.lt_product').on("tap", "a", function() {
+    var id = $(this).data("id");
+    location.href = "product.html?productId=" + id;
+  });
 
   //// 1. 一进入页面, 解析地址栏参数, 将值设置给input, 再进行页面渲染
   //// 获取搜索关键字
-  //var key = getSearch("key");
-  //$('.search_input').val( key );
-  //render();
-  //
-  //// 2. 点击搜索按钮, 进行搜索功能, 历史记录管理
-  //$('.search_btn').click(function() {
-  //  // 搜索成功, 需要更新历史记录
-  //  var key = $('.search_input').val();
-  //  if ( key === "" ) {
-  //    mui.toast("请输入搜索关键字");
-  //    return;
-  //  }
-  //
-  //  // 调用 render 方法, 重新根据搜索框的值进行页面渲染
-  //  render();
-  //
-  //  // 获取数组
-  //  var history = localStorage.getItem("search_list") || '[]';
-  //  var arr = JSON.parse( history );
-  //
-  //  // 1. 不能重复
-  //  var index = arr.indexOf( key );
-  //  if ( index > -1 ) {
-  //    arr.splice( index, 1 );
-  //  }
-  //  // 2. 不能超过 10 个
-  //  if ( arr.length >= 10 ) {
-  //    arr.pop();
-  //  }
-  //  // 添加到数组最前面
-  //  arr.unshift( key );
-  //  // 存到 localStorage 里面去
-  //  localStorage.setItem( "search_list", JSON.stringify( arr ) );
-  //
-  //  // 清空搜索框
-  //  $('.search_input').val("");
-  //});
-  //
-  //// 3. 添加排序功能
-  //// (1) 添加点击事件
-  //// (2) 如果没有current, 就要加上current, 并且其他 a 需要移除 current
-  ////     如果有 current, 切换小箭头方向即可
-  //// (3) 页面重新渲染
-  //$('.lt_sort a[data-type]').click(function() {
-  //
-  //  if ( $(this).hasClass("current") ) {
-  //    // 如果有 current, 切换小箭头方向
-  //    $(this).find("i").toggleClass("fa-angle-down").toggleClass("fa-angle-up");
-  //  }
-  //  else {
-  //    // 没有 current, 加上 current
-  //    $(this).addClass("current").siblings().removeClass("current");
-  //  }
-  //  // 调用 render 进行重新渲染
-  //  render();
-  //})
+  var key = getSearch("key");
+  $('.search_input').val( key );
+
+  // 2. 点击搜索按钮, 进行搜索功能, 历史记录管理
+  $('.search_btn').click(function() {
+    // 搜索成功, 需要更新历史记录
+    var key = $('.search_input').val();
+    if ( key === "" ) {
+      mui.toast("请输入搜索关键字");
+      return;
+    }
+
+    // 如果用户输入了内容, 说明需要进行内容更新, 搜索新内容
+    // 之前是用的 render, 现在可以通过直接调用一次下拉刷新 api, 触发一次下拉刷新即可
+    mui('.mui-scroll-wrapper').pullRefresh().pulldownLoading();
+
+    // 获取数组
+    var history = localStorage.getItem("search_list") || '[]';
+    var arr = JSON.parse( history );
+
+    // 1. 不能重复
+    var index = arr.indexOf( key );
+    if ( index > -1 ) {
+      arr.splice( index, 1 );
+    }
+    // 2. 不能超过 10 个
+    if ( arr.length >= 10 ) {
+      arr.pop();
+    }
+    // 添加到数组最前面
+    arr.unshift( key );
+    // 存到 localStorage 里面去
+    localStorage.setItem( "search_list", JSON.stringify( arr ) );
+
+    // 清空搜索框
+    $('.search_input').val("");
+  });
+
+  // 3. 添加排序功能
+  // (1) 添加点击事件
+  // (2) 如果没有current, 就要加上current, 并且其他 a 需要移除 current
+  //     如果有 current, 切换小箭头方向即可
+  // (3) 页面重新渲染
+  $('.lt_sort a[data-type]').on('tap', function() {
+
+    if ( $(this).hasClass("current") ) {
+      // 如果有 current, 切换小箭头方向
+      $(this).find("i").toggleClass("fa-angle-down").toggleClass("fa-angle-up");
+    }
+    else {
+      // 没有 current, 加上 current
+      $(this).addClass("current").siblings().removeClass("current");
+    }
+
+    // 而是调用下拉刷新来进行重新渲染
+    mui('.mui-scroll-wrapper').pullRefresh().pulldownLoading();
+  })
 
 
 

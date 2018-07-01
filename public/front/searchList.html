@@ -85,7 +85,7 @@
   <ul>
     {{ each data v i }}
       <li class="lt_product_item">
-        <a href="#">
+        <a href="product.html?productId={{ v.id }}" data-id="{{ v.id }}">
           <img src="{{ v.pic[0] ? v.pic[0].picAddr : './images/none.png' }}" alt="">
           <p class="mui-ellipsis-2">{{ v.proName }}</p>
           <p>
