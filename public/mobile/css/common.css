@@ -1,14 +1,15 @@
 html, body {
   width: 100%;
   height: 100%;
-  background-color: #fff;
 }
-
 * {
   margin: 0;
   padding: 0;
+}
+ul {
   list-style: none;
 }
+
 img {
   display: block;
   width: 100%;
@@ -18,32 +19,33 @@ img {
 .lt_container {
   width: 100%;
   height: 100%;
-  max-width: 640px;
   min-width: 320px;
+  max-width: 640px;
   margin: 0 auto;
   position: relative;
-  overflow: hidden;
   padding-top: 45px;
   padding-bottom: 55px;
 }
 
-/* 乐淘公共头部 开始 */
 .lt_header {
-  width: 100%;
-  height: 45px;
   position: absolute;
   left: 0;
   top: 0;
+  width: 100%;
+  height: 45px;
   background-color: #006699;
+  padding-left: 45px;
+  padding-right: 45px;
+  overflow: hidden;
 }
 .lt_header .icon_left,
-.lt_header .icon_right{
+.lt_header .icon_right {
   position: absolute;
   top: 0;
   width: 45px;
   height: 45px;
-  text-align: center;
   line-height: 45px;
+  text-align: center;
   color: #fff;
 }
 .lt_header .icon_left {
@@ -53,105 +55,122 @@ img {
   right: 0;
 }
 .lt_header h3 {
-  text-align: center;
+  height: 45px;
   line-height: 45px;
-  font-weight: normal;
+  text-align: center;
   font-size: 18px;
-  margin: 0;
   color: #fff;
+  font-weight: normal;
+  margin: 0;
 }
-/* 乐淘公共头部 结束 */
 
 
-/* lt_main 开始 */
+
+
 .lt_main {
-  position: relative;
   width: 100%;
   height: 100%;
+  position: relative;
+  overflow: hidden;
+  background-color: #fff;
 }
-/* lt_main 结束 */
 
 
-/* 乐淘公共底部 开始 */
 .lt_footer {
-  height: 55px;
-  width: 100%;
   position: absolute;
   left: 0;
   bottom: 0;
+  width: 100%;
+  height: 55px;
   background-color: #006699;
+  overflow: hidden;
 }
 .lt_footer li {
-  width: 25%;
-  height: 55px;
   float: left;
+  width: 25%;
   text-align: center;
 }
 .lt_footer li a {
   display: block;
-  width: 100%;
-  height: 100%;
   color: #fff;
   padding-top: 8px;
 }
 .lt_footer li p {
-  margin: 0;
   color: #fff;
+  margin: 0;
 }
-
-.lt_footer li.current a {
+.lt_footer li a.current {
   color: orange;
 }
-.lt_footer li.current p {
+.lt_footer li a.current p {
   color: orange;
 }
-/* 乐淘公共底部 结束 */
 
 
-
-
-/* search 开始 */
-.search {
+/* 公共的 lt_search 搜索框 */
+.lt_search {
   padding: 10px;
   position: relative;
 }
-.search .search_input {
+.lt_search input {
   height: 34px;
-  border: 1px solid #007aff;
-  font-size: 12px;
   border-radius: 5px;
+  border: 1px solid #007AFF;
   margin: 0;
+  font-size: 12px;
 }
-.search .search_btn {
+.lt_search button {
   position: absolute;
   right: 10px;
   top: 10px;
   border-radius: 0 5px 5px 0;
 }
-/* search 结束 */
 
 
-
-/* product 开始 */
-.product {
+/* 公共的 lt_product */
+.lt_product {
   padding: 10px;
 }
-.product_item {
+.lt_product_item {
   width: 48%;
   float: left;
-  text-align: center;
   border: 1px solid #ccc;
-  background-color: #fff;
-  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
   margin-bottom: 10px;
 }
-.product_item:nth-child(odd) {
+.lt_product_item:nth-child(2n+1) {
   margin-right: 4%;
 }
-.product_item .price {
-  color: #FF3636;
+
+.lt_product_item a {
+  display: block;
+  padding: 10px;
 }
-.product_item .old {
+.lt_product_item a .oldPrice {
   text-decoration: line-through;
 }
-/* product 结束 */
+.lt_product_item a .price {
+  color: #FF4141;
+}
+.lt_product_item .mui-ellipsis-2 {
+  height: 40px;
+}
+
+
+
+/* 公共的尺码样式 */
+.lt_size span {
+  height: 25px;
+  line-height: 25px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  background-color: #F5F5F5;
+  font-size: 12px;
+  padding: 0 3px;
+  margin: 3px 0;
+}
+.lt_size span.current {
+  background-color: orange;
+  color: white;
+}

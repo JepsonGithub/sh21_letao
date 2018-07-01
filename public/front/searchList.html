@@ -45,7 +45,7 @@
         <!-- 商品区域 -->
         <div class="lt_product">
           <!-- 挖个坑 -->
-          <div class="loading"></div>
+          <!--<div class="loading"></div>-->
         </div>
 
       </div>
@@ -86,7 +86,7 @@
     {{ each data v i }}
       <li class="lt_product_item">
         <a href="#">
-          <img src="{{ v.pic[0].picAddr }}" alt="">
+          <img src="{{ v.pic[0] ? v.pic[0].picAddr : './images/none.png' }}" alt="">
           <p class="mui-ellipsis-2">{{ v.proName }}</p>
           <p>
             <span class="price">¥{{ v.price }}</span>

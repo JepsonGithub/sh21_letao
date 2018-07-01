@@ -410,6 +410,18 @@ a:active
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
 }
+.mui-ellipsis-3
+{
+    display: -webkit-box;
+    overflow: hidden;
+
+    white-space: normal !important;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
 
 .mui-table
 {
@@ -736,7 +748,12 @@ p
     z-index: 1;
 
     width: 100%;
+    /* 注意: 默认手机端加载页面时, 不会开启 GPU 渲染,
+            transform: css3 的3d 样式设置, 会让手机强制开启 GPU 渲染
+            所以页面会更加流畅, (可能会让用户耗电点快一点)
 
+            GPU: 图形处理器
+    */
     -webkit-transform: translateZ(0);
             transform: translateZ(0);
 }

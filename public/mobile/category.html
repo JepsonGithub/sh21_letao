@@ -3,33 +3,39 @@
 <head>
   <meta charset="UTF-8">
   <title>乐淘商城</title>
-  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <link rel="icon" href="favicon.ico">
-  <link rel="stylesheet" href="lib/fa/css/font-awesome.css">
-  <link rel="stylesheet" href="lib/mui/css/mui.css">
+  <link rel="stylesheet" href="./lib/mui/css/mui.css">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="./lib/fa/css/font-awesome.min.css">
   <link rel="stylesheet" href="css/category.css">
 </head>
 <body>
 
-<!-- 整体容器 -->
+
+<!-- 整体区域, 全屏容器 -->
 <div class="lt_container">
-  
-  <!-- 乐淘公共头部 -->
+  <!-- 头部 -->
   <div class="lt_header">
-    <a href="index.html" class="icon_left"><i class="fa fa-home"></i></a>
+    <a href="index.html" class="icon_left">
+      <i class="fa fa-home"></i>
+    </a>
     <h3>乐淘云购</h3>
-    <a href="search.html" class="icon_right"><i class="fa fa-search"></i></a>
+    <a href="search.html" class="icon_right">
+      <i class="fa fa-search"></i>
+    </a>
   </div>
-  
-  <!-- 乐淘内部 -->
+
+
+  <!-- 主体部分 -->
   <div class="lt_main">
+    <!-- 需要有两个区域滚动 -->
     <div class="lt_category_left">
       <div class="mui-scroll-wrapper">
         <div class="mui-scroll">
-          <ul id="ul_left">
-            <!-- 挖个坑 -->
-            <!--<li class="current"><a href="#">运动馆</a></li>-->
+          <ul>
+            <!-- 挖了个坑 -->
           </ul>
         </div>
       </div>
@@ -37,31 +43,26 @@
     <div class="lt_category_right">
       <div class="mui-scroll-wrapper">
         <div class="mui-scroll">
-          <ul class="mui-clearfix" id="ul_right">
-            <!-- 再挖个坑 -->
-            <!--<li>-->
-              <!--<a href="#">-->
-                <!--<img src="images/brand1.png" alt="">-->
-                <!--<p>耐克</p>-->
-              <!--</a>-->
-            <!--</li>-->
+          <ul class="mui-clearfix">
+            <!-- 挖个坑 -->
           </ul>
         </div>
       </div>
     </div>
   </div>
-  
-  <!-- 乐淘底部 -->
+
+
+  <!-- 底部 -->
   <div class="lt_footer">
-    <ul class="mui-clearfix">
+    <ul>
       <li>
         <a href="index.html">
           <i class="fa fa-home"></i>
           <p>首页</p>
         </a>
       </li>
-      <li class="current">
-        <a href="category.html">
+      <li>
+        <a href="category.html" class="current">
           <i class="fa fa-bars"></i>
           <p>分类页</p>
         </a>
@@ -73,7 +74,7 @@
         </a>
       </li>
       <li>
-        <a href="user.html">
+        <a href="member.html">
           <i class="fa fa-user"></i>
           <p>会员中心</p>
         </a>
@@ -82,17 +83,17 @@
   </div>
 </div>
 
-<script type="text/html" id="tpl_left">
+<script type="text/html" id="leftTpl">
   {{ each rows v i }}
-    <li class="{{ i === 0 ? 'current' : '' }}" data-id="{{ v.id }}" ><a href="#">{{ v.categoryName }}</a></li>
+    <li><a href="#" data-id="{{ v.id }}" class="{{ i === 0 ? 'current' : '' }}">{{ v.categoryName }}</a></li>
   {{ /each }}
 </script>
 
-<script type="text/html" id="tpl_right">
+<script type="text/html" id="rightTpl">
   {{ if rows.length === 0 }}
-    <p class="nomore">没有更多分类信息了</p>
+    <p class="tips">没有更多分类信息了</p>
   {{ /if }}
-  
+
   {{ each rows v i }}
     <li>
       <a href="#">
@@ -105,11 +106,12 @@
 
 
 
-<script src="lib/mui/js/mui.js"></script>
-<script src="lib/zepto/zepto.min.js"></script>
-<script src="lib/artTemplate/template-web.js"></script>
+<script src="./lib/mui/js/mui.min.js"></script>
+<script src="./lib/zepto/zepto.min.js"></script>
+<script src="./lib/artTemplate/template-web.js"></script>
 <script src="js/common.js"></script>
 <script src="js/category.js"></script>
+
 
 </body>
 </html>

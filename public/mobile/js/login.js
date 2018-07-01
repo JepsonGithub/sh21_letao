@@ -1,27 +1,31 @@
 /**
- * Created by Jepson on 2018/4/3.
+ * Created by Jepson on 2018/5/15.
  */
 
 
-$(function () {
-  
-  $(".btn_login").on("click", function () {
-    
-    
-    var username = $("[name='username']").val().trim();
-    var password = $("[name='password']").val().trim();
-    
-    
-    //校验
-    if (!username) {
+$(function() {
+
+  // 需求: 实现登录功能
+  // 1. 点击登录按钮
+  // 2. 获取用户输入的用户名和密码
+  // 3. 发送 ajax 请求, 进行登陆
+
+  $('#loginBtn').click(function() {
+
+    var username = $('[name="username"]').val().trim();
+    var password = $('[name="password"]').val().trim();
+
+    if ( username === "" ) {
       mui.toast("请输入用户名");
-      return false;
+      return;
     }
-    if (!password) {
+
+    if ( password === "" ) {
       mui.toast("请输入密码");
-      return false;
+      return;
     }
-    
+
+    // 通过用户输入的用户名和密码, 进行发送 ajax 登录请求
     $.ajax({
       type: "post",
       url: "/user/login",
@@ -29,31 +33,34 @@ $(function () {
         username: username,
         password: password
       },
-      success: function (data) {
-        if (data.error === 403) {
-          mui.toast(data.message);
+      success: function( info ) {
+        console.log( info );
+        if ( info.error === 403 ) {
+          mui.toast("用户名或者密码错误");
         }
-        
-        if (data.success) {
-          //成功了，怎么办？
-          //如果是购物车这类页面跳转过来的，需要跳回去
-          //如果是直接访问的login页面，需要跳转到会员中心
-          //获取到retUrl参数，如果有这个参数，直接跳转回去即可。如果没有没有这个，默认跳到会员中心。
-          var search = location.search;
-          if (search.indexOf("retUrl") != -1) {
-            //说明需要回跳
-            search = search.replace("?retUrl=", "");
-            location.href = search;
-          } else {
-            //跳转到会员中心
-            location.href = "user.html";
+
+        if ( info.success ) {
+          // 说明用户登录成功
+          // (1) 如果是从其他页面拦截过来的, 比如商品详情页, 将来要跳回去
+          // (2) 如果是直接访问的 login.html, 跳转到会员中心
+
+          // 通过 判断地址栏参数, 有没有 retUrl 进行区分
+          if ( location.href.indexOf( "retUrl" ) > -1 ) {
+            // 说明有 retUrl 需要跳转回去
+            // ?retUrl=http://localhost:3000/front/product.html?productId=4
+            var url = location.search.replace("?retUrl=", "");
+            location.href = url;
           }
-          
+          else {
+            location.href = "member.html";
+          }
+
         }
       }
-    });
-    
-  });
-  
-  
-});
+    })
+
+
+  })
+
+
+})
