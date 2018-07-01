@@ -13,19 +13,7 @@
   text-decoration: line-through;
 }
 
-.lt_size span {
-  width: 25px;
-  height: 25px;
-  line-height: 25px;
-  text-align: center;
-  font-size: 12px;
-  display: inline-block;
-  border: 1px solid #ccc;
-}
-.lt_size span.current {
-  background-color: orange;
-  color: #fff;
-}
+
 
 
 
